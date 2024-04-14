@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: jmeter-pod
+ labels:
+  app: jmeter
+spec:
+ volumes:
+  - name: configuration-file
+    hostPath:
+      path: /run/desktop/mnt/host/d/Development/Projects/workspace/Infnet/devops/jmeter
+      type: DirectoryOrCreate
+ containers:
+  - name: jmeter
+    image: victorhdcampos/jmeter:0.1
+    command: ["sleep", "1d"]
+    ports:
+     - containerPort: 8080
+    volumeMounts:
+     - name: configuration-file
+       mountPath: /opt/apache-jmeter-5.5/bin/config

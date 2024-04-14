@@ -1,0 +1,54 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1400.v7fd111b_ec82f">
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3894.vd0f0248b_a_fc4">
+    <script>pipeline {
+    agent any
+    tools{
+        maven &quot;mvn&quot;
+    }
+    environment{
+        DOCKER_CREDS= credentials(&apos;dockerhub&apos;)
+    }
+
+    stages {
+        stage(&apos;Initialize&apos;) {
+            steps {
+                sh &apos;&apos;&apos;
+                  echo &quot;PATH=${PATH}&quot;
+                  echo &quot;M2_HOME= ${M2_HOME}&quot;
+                &apos;&apos;&apos;
+            }
+        }
+        stage(&apos;Git Checkout&apos;) {
+            steps {
+                git(
+                    url: &apos;https://github.com/victorhdcampos/product-app.git&apos;,
+                    branch: &apos;main&apos;)
+                script{
+                    TAG_VERSION = sh(script: &apos;git rev-parse --short HEAD&apos;, returnStdout:true).trim()
+                }
+            }
+        }
+        stage(&apos;Build&apos;) {
+             steps{
+                 sh &quot;mvn -DskipTests clean package&quot;
+
+             }
+             post{
+                 success {
+                     sh &apos;cp target/product-0.0.1-SNAPSHOT.jar docker/&apos;
+                 }
+             }
+         }
+
+    }
+}
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

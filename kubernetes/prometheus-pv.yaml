@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-pv
+spec:
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: storage-prometheus
+  capacity:
+    storage: 100Mi
+  hostPath:
+    path: /run/desktop/mnt/host/d/Development/Projects/workspace/Infnet/devops/prometheus/prometheus-data
+

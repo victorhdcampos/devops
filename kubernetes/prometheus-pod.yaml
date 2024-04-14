@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: prometheus-pod
+ labels:
+  app: prometheus
+spec:
+ volumes:
+  - name: configuration-dir
+    hostPath:
+      path: /run/desktop/mnt/host/d/Development/Projects/workspace/Infnet/devops/prometheus/config
+      type: DirectoryOrCreate
+  - name: configuration-file
+    hostPath:
+      path: /run/desktop/mnt/host/d/Development/Projects/workspace/Infnet/devops/prometheus/config/prometheus.yml
+      type: FileOrCreate
+  - name: prometheus-volume
+    persistentVolumeClaim:
+     claimName: prometheus-pvc	  
+ containers:
+  - name: prometheus
+    image: prom/prometheus
+    ports:
+     - containerPort: 9090
+    volumeMounts:
+     - name: configuration-dir
+       mountPath: /etc/prometheus
+     - name: configuration-file
+       mountPath: /etc/prometheus/prometheus.yml
+     - name: prometheus-volume
+       mountPath: /prometheus 

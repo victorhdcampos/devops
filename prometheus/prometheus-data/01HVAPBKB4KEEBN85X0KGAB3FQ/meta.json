@@ -1,0 +1,17 @@
+{
+	"ulid": "01HVAPBKB4KEEBN85X0KGAB3FQ",
+	"minTime": 1712966401514,
+	"maxTime": 1712973600000,
+	"stats": {
+		"numSamples": 1990368,
+		"numSeries": 1484,
+		"numChunks": 16604
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01HVAPBKB4KEEBN85X0KGAB3FQ"
+		]
+	},
+	"version": 1
+}

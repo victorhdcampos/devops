@@ -1,0 +1,36 @@
+{
+	"ulid": "01HV3TMAWJBSJBFHN9HF5E2APP",
+	"minTime": 1712708224392,
+	"maxTime": 1712728800000,
+	"stats": {
+		"numSamples": 4617950,
+		"numSeries": 1455,
+		"numChunks": 38159
+	},
+	"compaction": {
+		"level": 2,
+		"sources": [
+			"01HV304P31GF650ZCR0A22MAJZ",
+			"01HV3614CZWFKF33TRA8MC017T",
+			"01HV3CWVKSN2ARM3Z36BF8PS04"
+		],
+		"parents": [
+			{
+				"ulid": "01HV304P31GF650ZCR0A22MAJZ",
+				"minTime": 1712708224392,
+				"maxTime": 1712714400000
+			},
+			{
+				"ulid": "01HV3614CZWFKF33TRA8MC017T",
+				"minTime": 1712714400292,
+				"maxTime": 1712721600000
+			},
+			{
+				"ulid": "01HV3CWVKSN2ARM3Z36BF8PS04",
+				"minTime": 1712721600245,
+				"maxTime": 1712728800000
+			}
+		]
+	},
+	"version": 1
+}

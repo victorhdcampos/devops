@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: grafana-pod
+ labels:
+  app: grafana
+spec:
+ securityContext:
+  fsGroup: 472
+  supplementalGroups:
+   - 0
+ volumes:
+  - name: grafana-volume
+    persistentVolumeClaim:
+     claimName: grafana-pvc 
+ containers:
+  - name: grafana
+    image: grafana/grafana-enterprise
+    ports:
+     - containerPort: 9090
+    volumeMounts:
+     - name: grafana-volume
+       mountPath: /var/lib/grafana
